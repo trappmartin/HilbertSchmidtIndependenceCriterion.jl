@@ -15,11 +15,7 @@ function estimateKernelSize{T <: Real}(X::Array{T, 2}; sampleSize = 100)
 		S = M
 	end
 
-	dists = pairwise(SqEuclidean(), Xmed, Xmed)
-
-  sig = sqrt(0.5 * median(dists))
-
-	return sig
+	return median(pairwise(Euclidean(), Xmed'))
 
 end
 

@@ -3,18 +3,23 @@
 gammaHSIC(X::Array{T, 2}, Y::Array{T, 2})
 
 """ ->
-function gammaHSIC{T <: Real}(X::Array{T, 2}, Y::Array{T, 2}; α = 0.1, randomSubSet = 100)
+function gammaHSIC{T <: Real}(X::Array{T, 2}, Y::Array{T, 2}; α = 0.1, randomSubSet = 100, kernelSize = -1)
 
 	M = size(X)[1]
 
 	# get kernel sizes
-	sigx = estimateKernelSize(X, sampleSize = randomSubSet)
-	sigy = estimateKernelSize(Y, sampleSize = randomSubSet)
+	if kernelSize == -1
+		sigx = estimateKernelSize(X, sampleSize = randomSubSet)
+		sigy = estimateKernelSize(Y, sampleSize = randomSubSet)
+	else
+		sigx = kernelSize
+		sigy = kernelSize
+	end
 
 	bone = ones(T, M, 1)
 	H = eye(M) - 1/M * ones(T, M,M)
 
-	@time K = rbfDotProduct(X, X, sigx)
+	K = rbfDotProduct(X, X, sigx)
 	L = rbfDotProduct(Y, Y, sigy)
 
 	# NOTE: these are slightly biased estimates of centred Gram matrices
@@ -38,7 +43,6 @@ function gammaHSIC{T <: Real}(X::Array{T, 2}, Y::Array{T, 2}; α = 0.1, randomSu
 
 	al = mHSIC^2 / varHSIC
 	bet = varHSIC*M ./ mHSIC
-
 
 	return (testStat, gammainvcdf(al[1], bet[1], 1 - α))
 
