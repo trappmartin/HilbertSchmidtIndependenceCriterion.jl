@@ -1,6 +1,6 @@
 module HSIC
 
-	using StatsFuns
+	using StatsFuns, Distances
 
 	# includes
 	include("common.jl")

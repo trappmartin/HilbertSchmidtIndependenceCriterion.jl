@@ -11,10 +11,10 @@ function gammaHSIC{T <: Real}(X::Array{T, 2}, Y::Array{T, 2}; α = 0.1, randomSu
 	sigx = estimateKernelSize(X, sampleSize = randomSubSet)
 	sigy = estimateKernelSize(Y, sampleSize = randomSubSet)
 
-	bone = ones(M,1)
-	H = eye(M) - 1/M * ones(M,M)
+	bone = ones(T, M, 1)
+	H = eye(M) - 1/M * ones(T, M,M)
 
-	K = rbfDotProduct(X, X, sigx)
+	@time K = rbfDotProduct(X, X, sigx)
 	L = rbfDotProduct(Y, Y, sigy)
 
 	# NOTE: these are slightly biased estimates of centred Gram matrices
