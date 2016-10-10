@@ -8,14 +8,17 @@ function estimateKernelSize{T <: Real}(X::Array{T, 2}; sampleSize = 100)
 
 	# set kernel size to median distance between points
 	if M > sampleSize
-		Xmed = X[1:sampleSize,:] # NOTE: Replace this with random sampling in the future
+		Xmed = X[shuffle(collect(1:M))[1:sampleSize],:]
 		S = sampleSize
 	else
 		Xmed = X
 		S = M
 	end
 
-	return median(pairwise(Euclidean(), Xmed'))
+	dists = pairwise(SqEuclidean(), Xmed, Xmed) 
+  sig = sqrt(0.5 * median(dists))
+
+  return sig
 
 end
 
