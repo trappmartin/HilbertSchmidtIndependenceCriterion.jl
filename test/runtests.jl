@@ -1,4 +1,4 @@
-using HSIC
+using HilbertSchmidtIndependenceCriterion
 using Base.Test
 
 # data
@@ -26,7 +26,7 @@ Y = [-0.3025    0.3002   -0.1137   -0.1182    0.0001    0.0003   -0.0349    0.06
 
 # Common tests
 println("# Run Common Function Tests")
-@test_approx_eq_eps HSIC.estimateKernelSize(X) 2 1
+@test estimateKernelSize(X) ≈ 2 atol=1
 
 # rbf dot product truth
 rbftruth = [1.0000    0.2920    0.0945    0.0811    0.1872    0.1310    0.2986    0.2776    0.1904    0.2337;
@@ -40,12 +40,12 @@ rbftruth = [1.0000    0.2920    0.0945    0.0811    0.1872    0.1310    0.2986  
     0.1904    0.2955    0.1107    0.2275    0.2800    0.0352    0.0577    0.1383    1.0000    0.1272;
     0.2337    0.2940    0.1081    0.0472    0.1773    0.1519    0.3403    0.1189    0.1272    1.0000]
 
-@test_approx_eq_eps sum(HSIC.rbfDotProduct(X, X, 2.0) - rbftruth) 0.0 1e-4
+@test sum(rbfDotProduct(X, X, 2.0) - rbftruth) ≈ 0.0 atol=1e-4
 
 # Gamma HSIC tests
 println("# Run Gamma HSIC Test")
 
-@test_approx_eq_eps gammaHSIC(X, Y)[2] 0.4 1e-1
+@test gammaHSIC(X, Y)[2] ≈ 0.4 atol=1e-1
 @test gammaHSIC(X, Y)[1] < gammaHSIC(X, Y)[2]
 
 println("# Finished Tests")

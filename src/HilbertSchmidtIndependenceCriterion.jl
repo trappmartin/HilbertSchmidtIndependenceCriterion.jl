@@ -1,4 +1,4 @@
-module HSIC
+module HilbertSchmidtIndependenceCriterion
 
 	using StatsFuns, Distances
 
@@ -7,7 +7,6 @@ module HSIC
 	include("gammaHSIC.jl")
 
 	# function exports
-	export
-		gammaHSIC
+	export gammaHSIC, estimateKernelSize, rbfDotProduct
 
 end # module

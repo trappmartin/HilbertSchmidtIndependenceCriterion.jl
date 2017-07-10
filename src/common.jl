@@ -1,7 +1,8 @@
-@doc doc"""
-estimateKernelSize{T <: Real}(X::Array{T, 2}; sampleSize = 100)
-	 Estimate kernel size by taking median distance between points.
-""" ->
+"""
+    estimateKernelSize{T <: Real}(X::Array{T, 2}; sampleSize = 100)
+
+    Estimate kernel size by taking median distance between points.
+"""
 function estimateKernelSize{T <: Real}(X::Array{T, 2}; sampleSize = 100)
 
 	M = size(X)[1]
@@ -16,17 +17,16 @@ function estimateKernelSize{T <: Real}(X::Array{T, 2}; sampleSize = 100)
 	end
 
 	dists = pairwise(SqEuclidean(), Xmed, Xmed) 
-  sig = sqrt(0.5 * median(dists))
+    sig = sqrt(0.5 * median(dists))
 
-  return sig
-
+    return sig
 end
 
-@doc doc"""
-rbfDotProduct(X::Array{T, 2}, X::Array{T, 2}, kernelSize::Float64)
+"""
+    rbfDotProduct(X::Array{T, 2}, X::Array{T, 2}, kernelSize::Float64)
 
-""" ->
-function rbfDotProduct{T <: Real}(X::Array{T, 2}, Y::Array{T, 2}, kernelSize::Float64)
+"""
+function rbfDotProduct{T <: Real}(X::Array{T, 2}, Y::Array{T, 2}, kernelSize)
 
 	G = sum((X.*Y), 2)
 
@@ -35,6 +35,6 @@ function rbfDotProduct{T <: Real}(X::Array{T, 2}, Y::Array{T, 2}, kernelSize::Fl
 
 	H = Q + R - 2*X*Y'
 
-	return exp(-H/2/kernelSize^2)
+	return exp.(-H/2/kernelSize^2)
 
 end
