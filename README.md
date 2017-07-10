@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/trappmartin/HilbertSchmidtIndependenceCriterion.jl.svg?branch=master)](https://travis-ci.org/trappmartin/HilbertSchmidtIndependenceCriterion.jl)
 # Hilbert-Schmidt Independence Criterion (HSIC)
 
 This package provides basic implementations of the Hilbert-Schmidt Independence Criterion (HSIC).
