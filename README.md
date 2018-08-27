@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/trappmartin/HilbertSchmidtIndependenceCriterion.jl.svg?branch=master)](https://travis-ci.org/trappmartin/HilbertSchmidtIndependenceCriterion.jl)
+[![Coverage Status](https://coveralls.io/repos/github/trappmartin/HilbertSchmidtIndependenceCriterion.jl/badge.svg?branch=master)](https://coveralls.io/github/trappmartin/HilbertSchmidtIndependenceCriterion.jl?branch=master)
 # Hilbert-Schmidt Independence Criterion (HSIC)
 
 This package provides basic implementations of the Hilbert-Schmidt Independence Criterion (HSIC) for Julia 1.0.
