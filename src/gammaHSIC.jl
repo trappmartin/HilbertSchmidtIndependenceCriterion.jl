@@ -2,7 +2,7 @@
     gammaHSIC(X::Array{T, 2}, Y::Array{T, 2})
 
 """
-function gammaHSIC{T <: Real}(X::Array{T, 2}, Y::Array{T, 2}; α = 0.1, randomSubSet = 100, kernelSize = -1)
+function gammaHSIC(X::Array{T, 2}, Y::Array{T, 2}; α = 0.1, randomSubSet = 100, kernelSize = -1) where T <: Real
 
 	M = size(X)[1]
 
