@@ -32,13 +32,13 @@ function gammaHSIC(X::Array{T, 2}, Y::Array{T, 2}; α = 0.1, randomSubSet = 100,
 	varHSIC = 1/M/(M-1)* (  sum(sum(varHSIC)) - sum(diag(varHSIC))  ) # second subtracted term is bias correction
 	varHSIC = 72*(M-4)*(M-5)/M/(M-1)/(M-2)/(M-3) * varHSIC
 
-	K = K-diagm(diag(K))
-	L = L-diagm(diag(L))
+	K = K-diagm(0 => diag(K))
+	L = L-diagm(0 => diag(L))
 
 	muX = 1/M/(M-1)*bone'*(K*bone)
 	muY = 1/M/(M-1)*bone'*(L*bone)
 
-	mHSIC  = 1/M * ( 1 +muX*muY  - muX - muY )
+	mHSIC  = 1/M * ( 1 .+muX*muY - muX - muY )
 
 	al = mHSIC^2 / varHSIC
 	bet = varHSIC*M ./ mHSIC

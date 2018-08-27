@@ -28,13 +28,15 @@ end
 """
 function rbfDotProduct(X::Array{T, 2}, Y::Array{T, 2}, kernelSize) where T <: Real
 
-	G = sum((X.*Y), 2)
+	G = sum((X.*Y), dims = 2)
 
-	Q = repmat(G, 1, size(Y, 1))
-	R = repmat(G', size(X, 1), 1)
+	Q = repeat(G, 1, size(Y, 1))
+	R = repeat(G', size(X, 1), 1)
 
 	H = Q + R - 2*X*Y'
 
 	return exp.(-H/2/kernelSize^2)
 
 end
+
+eye(n) = Matrix(I, n, n)

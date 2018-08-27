@@ -2,6 +2,9 @@ module HilbertSchmidtIndependenceCriterion
 
 	using StatsFuns, Distances
 
+  # load Base modules
+  using Statistics, LinearAlgebra
+
 	# includes
 	include("common.jl")
 	include("gammaHSIC.jl")

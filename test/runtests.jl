@@ -1,5 +1,5 @@
 using HilbertSchmidtIndependenceCriterion
-using Base.Test
+using Test
 
 # data
 X = [-0.2433   -1.1410    0.7903   -0.5062    0.5668    0.6861    0.3256   -1.2743    0.3403   -0.4115;
