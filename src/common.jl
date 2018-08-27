@@ -3,7 +3,7 @@
 
     Estimate kernel size by taking median distance between points.
 """
-function estimateKernelSize{T <: Real}(X::Array{T, 2}; sampleSize = 100)
+function estimateKernelSize(X::Array{T, 2}; sampleSize = 100) where T <: Real
 
 	M = size(X)[1]
 
@@ -26,7 +26,7 @@ end
     rbfDotProduct(X::Array{T, 2}, X::Array{T, 2}, kernelSize::Float64)
 
 """
-function rbfDotProduct{T <: Real}(X::Array{T, 2}, Y::Array{T, 2}, kernelSize)
+function rbfDotProduct(X::Array{T, 2}, Y::Array{T, 2}, kernelSize) where T <: Real
 
 	G = sum((X.*Y), 2)
 
