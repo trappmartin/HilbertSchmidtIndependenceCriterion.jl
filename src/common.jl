@@ -16,7 +16,7 @@ function estimateKernelSize(X::Array{T, 2}; sampleSize = 100) where T <: Real
 		S = M
 	end
 
-	dists = pairwise(SqEuclidean(), Xmed, Xmed) 
+	dists = pairwise(SqEuclidean(), Xmed, Xmed, dims=2)
     sig = sqrt(0.5 * median(dists))
 
     return sig
@@ -28,15 +28,18 @@ end
 """
 function rbfDotProduct(X::Array{T, 2}, Y::Array{T, 2}, kernelSize) where T <: Real
 
-	G = sum((X.*Y), dims = 2)
+    H = zeros(size(X,1), size(Y,1))
+    @assert size(X,2) == size(Y,2)
 
-	Q = repeat(G, 1, size(Y, 1))
-	R = repeat(G', size(X, 1), 1)
+    for i in 1:size(X,1)
+        for j in 1:size(Y,1)
+            @inbounds begin
+                H[i,j] = first( (X[i,:].-Y[j,:]) * (X[i,:].-Y[j,:])' )
+            end
+        end
+    end
 
-	H = Q + R - 2*X*Y'
-
-	return exp.(-H/2/kernelSize^2)
-
+    return exp.(-H/2/kernelSize^2)
 end
 
 eye(n) = Matrix(I, n, n)
