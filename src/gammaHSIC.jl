@@ -5,7 +5,7 @@
 function gammaHSIC(X::Array{T, 2}, Y::Array{T, 2}; α = 0.1, randomSubSet = 100, kernelSize = -1) where T <: Real
 
 	M = size(X)[1]
-    @assert M > 1 "This implementation does not support univariate cases."
+    #@assert M > 1 "This implementation does not support univariate cases."
 
 	# get kernel sizes
 	if kernelSize == -1
@@ -42,9 +42,7 @@ function gammaHSIC(X::Array{T, 2}, Y::Array{T, 2}; α = 0.1, randomSubSet = 100,
 	mHSIC  = 1/M * ( 1 .+ muX*muY - muX - muY )
 
 	al = mHSIC^2 / varHSIC
-    @info al
 	bet = varHSIC*M ./ mHSIC
-    @info bet
 
 	return (testStat, gammainvcdf(al[1], bet[1], 1 - α))
 end
